@@ -75,6 +75,30 @@ const paths = [
     }
 ];
 
+const handleSinglePic = (input, output) => {
+    gm(input)
+    .resize(ResolutionW, ResolutionH, '^')
+    .density(ResolutionW, ResolutionH)
+    .gravity('Center')
+    .write(output, (err) => {
+        if (err) {
+            throw new Error(err);
+        }
+        gm(output)
+            .crop(WIDTH, HEIGHT, X, Y)
+            .write(output, (err) => {
+                if (err) {
+                    throw new Error(err);
+                }
+            });
+    });
+}
+
+handleSinglePic(
+    '/Users/guozhiyi/Desktop/ACCESS-ESM1-5_coupling.eps',
+    '/Users/guozhiyi/Desktop/ACCESS-ESM1-5_coupling.png'
+)
+
 /**
  * 
  * @param {string} input 
@@ -141,4 +165,4 @@ const main = () => {
     }
 }
 
-main();
+// main();
